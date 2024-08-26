@@ -1,31 +1,32 @@
 {
-  "name": "thomann-common-utils",
-  "version": "1.0.9",
-  "main": "dist/Common.js",  
-  "types": "dist/Common.d.ts", 
-  "scripts": {
-    "build": "tsc",
-    "lint": "eslint . --fix && prettier . --write",
-    "test": "jest"
-  },
-  "keywords": [],
-  "author": "Basal John",
-  "license": "ISC",
-  "description": "",
-  "devDependencies": {
-    "@eslint/js": "^9.9.1",
-    "@types/jest": "^29.5.12",
-    "eslint": "^9.9.1",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.2.1",
-    "globals": "^15.9.0",
-    "jest": "^29.7.0",
-    "prettier": "^3.3.3",
-    "ts-jest": "^29.2.5",
-    "typescript": "^5.5.4",
-    "typescript-eslint": "^8.2.0"
-  },
-  "dependencies": {
-    "extract-urls": "^1.4.1"
-  }
+    "name": "thomann-common-utils",
+    "version": "1.1.0",
+    "main": "dist/Common.js",
+    "types": "dist/Common.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "lint": "eslint . --fix && prettier . --write",
+        "prettier": "prettier . --write",
+        "test": "jest"
+    },
+    "keywords": [],
+    "author": "Basal John",
+    "license": "ISC",
+    "description": "",
+    "devDependencies": {
+        "@eslint/js": "^9.9.1",
+        "@types/jest": "^29.5.12",
+        "eslint": "^9.9.1",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-prettier": "^5.2.1",
+        "globals": "^15.9.0",
+        "jest": "^29.7.0",
+        "prettier": "^3.3.3",
+        "ts-jest": "^29.2.5",
+        "typescript": "^5.5.4",
+        "typescript-eslint": "^8.2.0"
+    },
+    "dependencies": {
+        "extract-urls": "^1.4.1"
+    }
 }

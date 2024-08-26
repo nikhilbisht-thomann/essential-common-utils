@@ -4,21 +4,21 @@ A collection of utility functions for various common operations in JavaScript an
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Usage Example](#usage-example)
-- [Functions](#functions)
-  - [generateRandomArrayIndex](#generaterandomarrayindex)
-  - [trimAndRemoveSpaces](#trimandremovespaces)
-  - [extractUrlsFromText](#extracturlsfromtext)
-  - [trimAndRemoveDoubleSpaces](#trimandremovedoublespaces)
-  - [trimAndRemoveUnicodeCharacter](#trimandremoveunicodecharacter)
-  - [normalizeWhitespace](#normalizewhitespace)
-  - [splitTextAndGetPart](#splittextandgetpart)
-  - [normalizeWhitespacesAndRemoveSoftHyphen](#normalizewhitespacesandremovesofthyphen)
-  - [convertToEuropeFormat](#converttoeuropeformat)
-  - [getCamelCaseText](#getcamelcasetext)
-  - [getExecutionTime](#getexecutiontime)
-- [License](#license)
+-   [Installation](#installation)
+-   [Usage Example](#usage-example)
+-   [Functions](#functions)
+    -   [generateRandomArrayIndex](#generaterandomarrayindex)
+    -   [trimAndRemoveSpaces](#trimandremovespaces)
+    -   [extractUrlsFromText](#extracturlsfromtext)
+    -   [trimAndRemoveDoubleSpaces](#trimandremovedoublespaces)
+    -   [trimAndRemoveUnicodeCharacter](#trimandremoveunicodecharacter)
+    -   [normalizeWhitespace](#normalizewhitespace)
+    -   [splitTextAndGetPart](#splittextandgetpart)
+    -   [normalizeWhitespacesAndRemoveSoftHyphen](#normalizewhitespacesandremovesofthyphen)
+    -   [convertToEuropeFormat](#converttoeuropeformat)
+    -   [getCamelCaseText](#getcamelcasetext)
+    -   [getExecutionTime](#getexecutiontime)
+-   [License](#license)
 
 ## Installation
 
@@ -29,6 +29,7 @@ npm install thomann-common-utils
 ```
 
 ## Usage Example
+
 import { generateRandomArrayIndex } from 'thomann-common-utils';
 
 ```shell
