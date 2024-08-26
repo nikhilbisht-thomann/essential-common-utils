@@ -1,4 +1,4 @@
-# Thomann Utils
+# Common util for e2e
 
 A collection of utility functions for various common operations in JavaScript and TypeScript projects. The `common-utils-e2e` package provides a set of reusable functions for string manipulation, number formatting, URL extraction, and more.
 
