@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es2021",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./out",
+    "rootDir": "./src",
+    "lib": ["es2021", "dom"],
+    "resolveJsonModule": true,
+    "noEmitOnError": true
+  },
+  "include": ["src/**/*", "src/extract-urls.d.ts"],
+  "exclude": ["tests", "node_modules"]
+}
