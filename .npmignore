@@ -1,5 +1,15 @@
+# Ignore build output
 src/
 tests/
-.git/
-.vscode/
 node_modules/
+*.ts
+!.npmignore
+
+# Ignore configuration files not needed in the package
+.eslintignore
+.eslintrc.js
+.prettierignore
+.prettierrc
+tsconfig.json
+jest.config.js
+package-lock.json
