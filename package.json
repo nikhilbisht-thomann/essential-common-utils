@@ -1,6 +1,6 @@
 {
-  "name": "common-utils-e2e",
-  "version": "1.0.4",
+  "name": "thomann-common-utils",
+  "version": "1.0.6",
   "main": "index.js",
   "scripts": {
     "build": "tsc",

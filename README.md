@@ -1,6 +1,6 @@
-# Common util for e2e
+# Common utilities
 
-A collection of utility functions for various common operations in JavaScript and TypeScript projects. The `common-utils-e2e` package provides a set of reusable functions for string manipulation, number formatting, URL extraction, and more.
+A collection of utility functions for various common operations in JavaScript and TypeScript projects. The `thomann-common-utils` package provides a set of reusable functions for string manipulation, number formatting, URL extraction, and more.
 
 ## Table of Contents
 
@@ -25,11 +25,11 @@ A collection of utility functions for various common operations in JavaScript an
 You can install the package via npm:
 
 ```shell
-npm install common-utils-e2e
+npm install thomann-common-utils
 ```
 
 ## Usage Example
-import { generateRandomArrayIndex } from 'common-utils-e2e';
+import { generateRandomArrayIndex } from 'thomann-common-utils';
 
 ```shell
 const randomIndex = generateRandomArrayIndex(10); // Generates a random index between 0 and 9
