@@ -1,7 +1,8 @@
 {
   "name": "thomann-common-utils",
-  "version": "1.0.6",
-  "main": "index.js",
+  "version": "1.0.9",
+  "main": "dist/Common.js",  
+  "types": "dist/Common.d.ts", 
   "scripts": {
     "build": "tsc",
     "lint": "eslint . --fix && prettier . --write",
