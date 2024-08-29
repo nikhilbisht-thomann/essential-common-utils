@@ -10,6 +10,7 @@ import {
     convertToEuropeFormat,
     getCamelCaseText,
     getExecutionTime,
+    extractTextOnly,
 } from '../src/Common';
 
 test('generateRandomArrayIndex should return a number within range', () => {
@@ -71,4 +72,11 @@ test('getExecutionTime should calculate the execution time in seconds', () => {
         const executionTime = getExecutionTime(startTime);
         expect(parseFloat(executionTime)).toBeGreaterThan(0);
     }, 100);
+});
+
+test('extractTextOnly should remove numbers and currency symbols from a string', () => {
+    expect(extractTextOnly('Price is 100€')).toBe('Price is');
+    expect(extractTextOnly('Total: $123.45')).toBe('Total:');
+    expect(extractTextOnly('Amount: £50,000')).toBe('Amount:');
+    expect(extractTextOnly('No numbers or symbols')).toBe('No numbers or symbols');
 });

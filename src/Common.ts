@@ -104,3 +104,11 @@ export const getExecutionTime = (startTime: number): string => {
     const endTime = Date.now();
     return ((endTime - startTime) / 1000).toFixed(2);
 };
+
+/**
+ * Extracts only the text content, removing numbers and currency symbols.
+ *
+ * @param {string} input - The input string to extract text from.
+ * @returns {string} The input string without numbers and currency symbols.
+ */
+export const extractTextOnly = (input: string): string => input.replace(/[\d€$£,.]+/g, '').trim();
