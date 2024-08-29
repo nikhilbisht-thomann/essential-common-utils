@@ -1,6 +1,6 @@
 {
     "name": "essential-common-utils",
-    "version": "1.1.5",
+    "version": "1.1.6",
     "main": "dist/Common.js",
     "types": "dist/Common.d.ts",
     "scripts": {
@@ -15,7 +15,7 @@
     ],
     "keywords": [],
     "author": "Basal John",
-    "license": "ISC",
+    "license": "MIT",
     "description": "A collection of essential utilities for various tasks",
     "repository": {
         "type": "git",
