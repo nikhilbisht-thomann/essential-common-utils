@@ -18,6 +18,7 @@ A collection of essesntial utility functions for various common operations in Ja
     -   [convertToEuropeFormat](#converttoeuropeformat)
     -   [getCamelCaseText](#getcamelcasetext)
     -   [getExecutionTime](#getexecutiontime)
+    -   [extractTextOnly](#extractTextOnly)
 -   [License](#license)
 
 ## Installation
