@@ -66,9 +66,8 @@ export const splitTextAndGetPart = (text: string, delimiter: string, index: numb
  * @param {string} text - The text to normalize whitespace in and remove soft hyphens from.
  * @returns {string} The input string with normalized whitespace and without soft hyphens.
  */
-export const normalizeWhitespacesAndRemoveSoftHyphen = (text: string): string => {
-    return normalizeWhitespace(text.replace(/\u00ad/g, ' '));
-};
+export const normalizeWhitespacesAndRemoveSoftHyphen = (text: string): string =>
+    normalizeWhitespace(text.replaceAll('­', ''));
 
 /**
  * Converts a number to a string in the European format.
