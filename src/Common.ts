@@ -111,3 +111,13 @@ export const getExecutionTime = (startTime: number): string => {
  * @returns {string} The input string without numbers and currency symbols.
  */
 export const extractTextOnly = (input: string): string => input.replace(/[\d€$£,.]+/g, '').trim();
+
+/**
+ * Trims a number to two decimal places.
+ *
+ * @param {number} num - The number to be trimmed.
+ * @returns {number} The number trimmed to two decimal places.
+ */
+export const trimToTwoDecimalPlaces = (num: number): number => {
+    return parseFloat(num.toFixed(2));
+};

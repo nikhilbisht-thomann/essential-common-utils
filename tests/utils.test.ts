@@ -11,6 +11,7 @@ import {
     getCamelCaseText,
     getExecutionTime,
     extractTextOnly,
+    trimToTwoDecimalPlaces,
 } from '../src/Common';
 
 test('generateRandomArrayIndex should return a number within range', () => {
@@ -53,6 +54,10 @@ test('splitTextAndGetPart should return the correct part after splitting by a de
 test('normalizeWhitespacesAndRemoveSoftHyphen should normalize spaces and remove soft hyphens', () => {
     expect(normalizeWhitespacesAndRemoveSoftHyphen('Hello\u00ad World')).toBe('Hello World');
     expect(normalizeWhitespacesAndRemoveSoftHyphen('This  is  a\u00adtest')).toBe('This is a test');
+    expect(normalizeWhitespacesAndRemoveSoftHyphen('  Multiple   spaces \u00ad and \n newlines  ')).toBe(
+        'Multiple spaces and newlines',
+    );
+    expect(normalizeWhitespacesAndRemoveSoftHyphen('Soft\u00adHyphen')).toBe('SoftHyphen');
 });
 
 test('convertToEuropeFormat should format numbers in European format', () => {
@@ -79,4 +84,12 @@ test('extractTextOnly should remove numbers and currency symbols from a string',
     expect(extractTextOnly('Total: $123.45')).toBe('Total:');
     expect(extractTextOnly('Amount: £50,000')).toBe('Amount:');
     expect(extractTextOnly('No numbers or symbols')).toBe('No numbers or symbols');
+});
+
+test('trimToTwoDecimalPlaces should trim a number to two decimal places', () => {
+    expect(trimToTwoDecimalPlaces(123.456)).toBe(123.46);
+    expect(trimToTwoDecimalPlaces(123.4)).toBe(123.4);
+    expect(trimToTwoDecimalPlaces(123)).toBe(123.0);
+    expect(trimToTwoDecimalPlaces(0.1234)).toBe(0.12);
+    expect(trimToTwoDecimalPlaces(0)).toBe(0.0);
 });
