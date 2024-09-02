@@ -19,6 +19,7 @@ A collection of essesntial utility functions for various common operations in Ja
     -   [getCamelCaseText](#getcamelcasetext)
     -   [getExecutionTime](#getexecutiontime)
     -   [extractTextOnly](#extractTextOnly)
+    -   [trimToTwoDecimalPlaces](#trimToTwoDecimalPlaces)
 -   [License](#license)
 
 ## Installation
