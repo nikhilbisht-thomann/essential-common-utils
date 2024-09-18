@@ -82,15 +82,36 @@ export const convertToEuropeFormat = (value: number): string =>
     });
 
 /**
- * Converts a given text to camelCase format.
+ * Converts a string to camelCase.
+ * Removes all non-alphabetic characters and converts the result to camelCase,
+ * where the first word is in lowercase and subsequent words are capitalized.
  *
- * @param {string} text - The input text to be converted.
- * @returns {string} The input text converted to camelCase format.
+ * @param {string} text - The input string to convert to camelCase.
+ * @returns {string} The input string converted to camelCase.
  */
 export const getCamelCaseText = (text: string): string => {
-    const words = text.split(' ');
+    return text
+        .replace(/[^a-zA-Z]+/g, ' ')
+        .trim()
+        .toLowerCase()
+        .split(/\s+/)
+        .map((word, index) => index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1))
+        .join('');
+};
 
-    return words[0].charAt(0).toUpperCase() + words[0].slice(1).toLowerCase();
+/**
+ * Converts a given text to PascalCase format.
+ * Removes all non-alphabetic characters before converting to PascalCase.
+ *
+ * @param {string} text - The input text to be converted.
+ * @returns {string} The input text converted to PascalCase format.
+ */
+export const getPascalCaseText = (text: string): string => {
+    const words = text.replace(/[^a-zA-Z ]+/g, ' ').split(' ').filter(Boolean);
+
+    return words
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+        .join('');
 };
 
 /**
