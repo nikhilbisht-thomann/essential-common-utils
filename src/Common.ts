@@ -82,10 +82,10 @@ export const convertToEuropeFormat = (value: number): string =>
     });
 
 /**
- * Converts a given text to pascalCase format.
+ * Converts a given text to camelCase format.
  *
  * @param {string} text - The input text to be converted.
- * @returns {string} The input text converted to pascalCase format.
+ * @returns {string} The input text converted to camelCase format.
  */
 export const getCamelCaseText = (text: string): string => {
     const words = text.split(' ');
