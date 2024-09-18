@@ -17,6 +17,7 @@ import {
 test('generateRandomArrayIndex should return a number within range', () => {
     const arrayLength = 10;
     const index = generateRandomArrayIndex(arrayLength);
+
     expect(index).toBeGreaterThanOrEqual(0);
     expect(index).toBeLessThan(arrayLength);
 });
@@ -28,6 +29,7 @@ test('trimAndRemoveSpaces should remove spaces from a string', () => {
 test('extractUrlsFromText should extract URLs from text', () => {
     const text = 'Check out https://example.com and http://test.com';
     const urls = extractUrlsFromText(text);
+
     expect(urls).toEqual(['https://example.com', 'http://test.com']);
 });
 
@@ -47,6 +49,7 @@ test('normalizeWhitespace should normalize spaces and newlines', () => {
 
 test('splitTextAndGetPart should return the correct part after splitting by a delimiter', () => {
     const text = 'one,two,three';
+
     expect(splitTextAndGetPart(text, ',', 1)).toBe('two');
     expect(splitTextAndGetPart(text, ',', 0)).toBe('one');
 });
@@ -78,6 +81,7 @@ test('getExecutionTime should calculate the execution time in seconds', () => {
     // Simulate some delay
     setTimeout(() => {
         const executionTime = getExecutionTime(startTime);
+
         expect(parseFloat(executionTime)).toBeGreaterThan(0);
     }, 100);
 });
