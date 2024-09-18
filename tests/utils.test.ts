@@ -12,7 +12,8 @@ import {
     getCamelCaseText,
     getExecutionTime,
     extractTextOnly,
-    trimToTwoDecimalPlaces, capitalizeFirstWord,
+    trimToTwoDecimalPlaces,
+    capitalizeFirstWord,
 } from '../src/Common';
 
 test('generateRandomArrayIndex should return a number within range', () => {
