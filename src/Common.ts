@@ -70,6 +70,18 @@ export const normalizeWhitespacesAndRemoveSoftHyphen = (text: string): string =>
     normalizeWhitespace(text.replaceAll('­', ''));
 
 /**
+ * Capitalizes the first letter of the first word and makes the rest lowercase.
+ *
+ * @param {string} text - The input text to be processed.
+ * @returns {string} The input text with the first word capitalized and the rest lowercase.
+ */
+export const capitalizeFirstWord = (text: string): string => {
+    const words = text.split(' ');
+
+    return words[0].charAt(0).toUpperCase() + words[0].slice(1).toLowerCase();
+};
+
+/**
  * Converts a number to a string in the European format.
  *
  * @param {number} value - The number to convert.

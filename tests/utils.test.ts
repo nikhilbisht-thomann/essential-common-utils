@@ -11,7 +11,7 @@ import {
     getCamelCaseText,
     getExecutionTime,
     extractTextOnly,
-    trimToTwoDecimalPlaces,
+    trimToTwoDecimalPlaces, capitalizeFirstWord,
 } from '../src/Common';
 
 test('generateRandomArrayIndex should return a number within range', () => {
@@ -61,6 +61,11 @@ test('normalizeWhitespacesAndRemoveSoftHyphen should normalize spaces and remove
         'Multiple spaces and newlines',
     );
     expect(normalizeWhitespacesAndRemoveSoftHyphen('Soft\u00adHyphen')).toBe('SoftHyphen');
+});
+
+test('capitalizeFirstWord should capitalize only the first word', () => {
+    expect(capitalizeFirstWord('hello world')).toBe('Hello');
+    expect(capitalizeFirstWord('JAVASCRIPT testing')).toBe('Javascript');
 });
 
 test('convertToEuropeFormat should format numbers in European format', () => {
