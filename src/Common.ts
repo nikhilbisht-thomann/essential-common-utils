@@ -95,7 +95,7 @@ export const getCamelCaseText = (text: string): string => {
         .trim()
         .toLowerCase()
         .split(/\s+/)
-        .map((word, index) => index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1))
+        .map((word, index) => (index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1)))
         .join('');
 };
 
@@ -107,11 +107,12 @@ export const getCamelCaseText = (text: string): string => {
  * @returns {string} The input text converted to PascalCase format.
  */
 export const getPascalCaseText = (text: string): string => {
-    const words = text.replace(/[^a-zA-Z ]+/g, ' ').split(' ').filter(Boolean);
+    const words = text
+        .replace(/[^a-zA-Z ]+/g, ' ')
+        .split(' ')
+        .filter(Boolean);
 
-    return words
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-        .join('');
+    return words.map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join('');
 };
 
 /**
