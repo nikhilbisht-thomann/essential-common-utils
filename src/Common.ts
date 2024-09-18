@@ -82,24 +82,15 @@ export const convertToEuropeFormat = (value: number): string =>
     });
 
 /**
- * Converts a given text to camelCase format.
- * Removes all non-alphabetic characters before converting to camelCase.
+ * Converts a given text to pascalCase format.
  *
  * @param {string} text - The input text to be converted.
- * @returns {string} The input text converted to camelCase format.
+ * @returns {string} The input text converted to pascalCase format.
  */
 export const getCamelCaseText = (text: string): string => {
-    const sanitizedText = text.replace(/[^a-zA-Z ]+/g, ' ');
-    const words = sanitizedText.split(' ').filter(Boolean);
+    const words = text.split(' ');
 
-    return words
-        .map((word, index) => {
-            if (index === 0) {
-                return word.toLowerCase();
-            }
-            return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-        })
-        .join('');
+    return words[0].charAt(0).toUpperCase() + words[0].slice(1).toLowerCase();
 };
 
 /**
@@ -112,19 +103,6 @@ export const getExecutionTime = (startTime: number): string => {
     const endTime = Date.now();
     return ((endTime - startTime) / 1000).toFixed(2);
 };
-
-/**
- * Converts a given text to pascalCase format.
- *
- * @param {string} text - The input text to be converted.
- * @returns {string} The input text converted to pascalCase format.
- */
-export const getPascalCaseText = (text: string): string => {
-    const words = text.split(' ');
-
-    return words[0].charAt(0).toUpperCase() + words[0].slice(1).toLowerCase();
-};
-
 
 /**
  * Extracts only the text content, removing numbers and currency symbols.
