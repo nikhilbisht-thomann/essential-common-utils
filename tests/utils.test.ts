@@ -53,7 +53,7 @@ test('splitTextAndGetPart should return the correct part after splitting by a de
 
 test('normalizeWhitespacesAndRemoveSoftHyphen should normalize spaces and remove soft hyphens', () => {
     expect(normalizeWhitespacesAndRemoveSoftHyphen('Hello\u00ad World')).toBe('Hello World');
-    expect(normalizeWhitespacesAndRemoveSoftHyphen('This  is  a\u00adtest')).toBe('This is a test');
+    expect(normalizeWhitespacesAndRemoveSoftHyphen('This  is  a\u00adtest')).toBe('This is atest');
     expect(normalizeWhitespacesAndRemoveSoftHyphen('  Multiple   spaces \u00ad and \n newlines  ')).toBe(
         'Multiple spaces and newlines',
     );
