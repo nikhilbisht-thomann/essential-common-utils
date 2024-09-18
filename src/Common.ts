@@ -114,6 +114,19 @@ export const getExecutionTime = (startTime: number): string => {
 };
 
 /**
+ * Converts a given text to pascalCase format.
+ *
+ * @param {string} text - The input text to be converted.
+ * @returns {string} The input text converted to pascalCase format.
+ */
+export const getPascalCaseText = (text: string): string => {
+    const words = text.split(' ');
+
+    return words[0].charAt(0).toUpperCase() + words[0].slice(1).toLowerCase();
+};
+
+
+/**
  * Extracts only the text content, removing numbers and currency symbols.
  *
  * @param {string} input - The input string to extract text from.

@@ -12,6 +12,7 @@ import {
     getExecutionTime,
     extractTextOnly,
     trimToTwoDecimalPlaces,
+    getPascalCaseText,
 } from '../src/Common';
 
 test('generateRandomArrayIndex should return a number within range', () => {
@@ -66,8 +67,6 @@ test('convertToEuropeFormat should format numbers in European format', () => {
 });
 
 test('getCamelCaseText should convert text to camelCase', () => {
-    expect(getCamelCaseText('hello world')).toBe('Hello');
-    expect(getCamelCaseText('JAVASCRIPT testing')).toBe('Javascript');
     expect(getCamelCaseText('e-Scooter')).toBe('eScooter');
     expect(getCamelCaseText('Giant+nutella')).toBe('giantNutella');
     expect(getCamelCaseText('oppa gangnam-Style')).toBe('oppaGangnamStyle');
@@ -80,6 +79,11 @@ test('getExecutionTime should calculate the execution time in seconds', () => {
         const executionTime = getExecutionTime(startTime);
         expect(parseFloat(executionTime)).toBeGreaterThan(0);
     }, 100);
+});
+
+test('getPascalCaseText should convert text to pascalCase', () => {
+    expect(getPascalCaseText('hello world')).toBe('Hello');
+    expect(getPascalCaseText('JAVASCRIPT testing')).toBe('Javascript');
 });
 
 test('extractTextOnly should remove numbers and currency symbols from a string', () => {
