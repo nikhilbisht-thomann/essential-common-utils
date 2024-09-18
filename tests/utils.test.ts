@@ -8,6 +8,7 @@ import {
     splitTextAndGetPart,
     normalizeWhitespacesAndRemoveSoftHyphen,
     convertToEuropeFormat,
+    getPascalCaseText,
     getCamelCaseText,
     getExecutionTime,
     extractTextOnly,
@@ -69,8 +70,29 @@ test('convertToEuropeFormat should format numbers in European format', () => {
 });
 
 test('getCamelCaseText should convert text to camelCase', () => {
-    expect(getCamelCaseText('hello world')).toBe('Hello');
-    expect(getCamelCaseText('JAVASCRIPT testing')).toBe('Javascript');
+    expect(getCamelCaseText('hello')).toBe('hello');
+    expect(getCamelCaseText('hello world')).toBe('helloWorld');
+    expect(getCamelCaseText('JAVASCRIPT testing')).toBe('javascriptTesting');
+    expect(getCamelCaseText('e-Scooter')).toBe('eScooter');
+    expect(getCamelCaseText('Giant+nutella')).toBe('giantNutella');
+    expect(getCamelCaseText('oppa gangnam-Style')).toBe('oppaGangnamStyle');
+    expect(getCamelCaseText('   spaced    words   ')).toBe('spacedWords');
+    expect(getCamelCaseText('123 Number 4 Test!')).toBe('numberTest');
+    expect(getCamelCaseText('')).toBe('');
+    expect(getCamelCaseText('!@#$%^&*()')).toBe('');
+});
+
+test('getPascalCaseText should convert text to PascalCase', () => {
+    expect(getPascalCaseText('hello')).toBe('Hello');
+    expect(getPascalCaseText('hello world')).toBe('HelloWorld');
+    expect(getPascalCaseText('JAVASCRIPT testing')).toBe('JavascriptTesting');
+    expect(getPascalCaseText('e-Scooter')).toBe('EScooter');
+    expect(getPascalCaseText('Giant+nutella')).toBe('GiantNutella');
+    expect(getPascalCaseText('oppa gangnam-Style')).toBe('OppaGangnamStyle');
+    expect(getPascalCaseText('   spaced    words   ')).toBe('SpacedWords');
+    expect(getPascalCaseText('123 Number 4 Test!')).toBe('NumberTest');
+    expect(getPascalCaseText('')).toBe('');
+    expect(getPascalCaseText('!@#$%^&*()')).toBe('');
 });
 
 test('getExecutionTime should calculate the execution time in seconds', () => {
