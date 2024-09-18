@@ -83,14 +83,21 @@ export const convertToEuropeFormat = (value: number): string =>
 
 /**
  * Converts a given text to camelCase format.
+ * Removes all non-alphabetic characters before converting to camelCase.
  *
  * @param {string} text - The input text to be converted.
  * @returns {string} The input text converted to camelCase format.
  */
 export const getCamelCaseText = (text: string): string => {
-    const words = text.split(' ');
+    const sanitizedText = text.replace(/[^a-zA-Z ]+/g, ' ');
+    const words = sanitizedText.split(' ').filter(Boolean);
 
-    return words[0].charAt(0).toUpperCase() + words[0].slice(1).toLowerCase();
+    return words.map((word, index) => {
+        if (index === 0) {
+            return word.toLowerCase();
+        }
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    }).join('');
 };
 
 /**
