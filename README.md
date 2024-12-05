@@ -2,14 +2,6 @@
 
 A collection of essesntial utility functions for various common operations in JavaScript and TypeScript projects. The `essential-common-utils` package provides a set of reusable functions for string manipulation, number formatting, URL extraction, and more.
 
-## File Location
-
-The utility functions are defined in:
-
-```
-thomann-utils/src/Common.ts
-```
-
 ## Utility Functions
 
 ### 1. `generateRandomArrayIndex`
