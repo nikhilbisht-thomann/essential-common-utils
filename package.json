@@ -1,6 +1,6 @@
 {
     "name": "essential-common-utils",
-    "version": "1.4.2",
+    "version": "1.4.3",
     "main": "dist/Common.js",
     "types": "dist/Common.d.ts",
     "scripts": {
@@ -38,6 +38,7 @@
         "typescript-eslint": "^8.13.0"
     },
     "dependencies": {
-        "extract-urls": "^1.4.1"
+        "extract-urls": "^1.4.1",
+        "playwright-ci-reporter": "^1.0.2"
     }
 }
