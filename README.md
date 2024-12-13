@@ -225,6 +225,20 @@ Trims a number to two decimal places.
     // Output: 123.46
     ```
 
+### 16. `getMultipleUniqueIndexes`
+
+Generates multiple unique indexes for an array.
+
+-   **Parameters**:
+    -   `arrayLength` (number)
+    -   `count` (number)
+-   **Returns**: An array of unique indexes.
+-   **Example**:
+    ```typescript
+    const indexes = getMultipleUniqueIndexes(10, 5);
+    // Output: [1, 3, 5, 7, 9]
+    ```
+
 ---
 
 ## Usage
