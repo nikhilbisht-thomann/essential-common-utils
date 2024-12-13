@@ -155,3 +155,33 @@ export const extractTextOnly = (input: string): string => input.replace(/[\d€$
 export const trimToTwoDecimalPlaces = (num: number): number => {
     return parseFloat(num.toFixed(2));
 };
+
+/**
+ * Generates a specified number of unique random numbers from a given range, adjusting `count` if it exceeds `length`.
+ *
+ * @param length - The upper limit of the range (inclusive). The range is [1, length].
+ * @param count - The number of unique random numbers to generate (default is 1).
+ *           If `count` exceeds `length`, it is set to `length`.
+ * @returns An array containing `count` unique random numbers within the range [1, length].
+ * @throws If `count` is greater than `length`, an error is thrown.
+ *
+ * @example
+ * // Generate 3 unique random numbers from 1 to 5
+ * getMultipleUniqueNumbers(5, 3); // Example output: [4, 2, 5]
+ *
+ * @example
+ * // Generate 5 unique random numbers from 1 to 10
+ * getMultipleUniqueNumbers(10, 12); // Example output: [3, 9, 4, 2, 5, 7, 1, 8, 10]
+ */
+export const getMultipleUniqueIndexes = (length: number, count = 1): number[] => {
+    if (count > length) {
+        count = length;
+    }
+
+    const numbers = Array.from({length}, (_, i) => i + 1);
+    for (let i = numbers.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+    }
+    return numbers.slice(0, count);
+};

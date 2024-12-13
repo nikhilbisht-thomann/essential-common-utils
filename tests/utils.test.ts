@@ -14,6 +14,7 @@ import {
     extractTextOnly,
     trimToTwoDecimalPlaces,
     capitalizeFirstWord,
+    getMultipleUniqueIndexes,
 } from '../src/Common';
 
 test('generateRandomArrayIndex should return a number within range', () => {
@@ -124,4 +125,11 @@ test('trimToTwoDecimalPlaces should trim a number to two decimal places', () => 
     expect(trimToTwoDecimalPlaces(123)).toBe(123.0);
     expect(trimToTwoDecimalPlaces(0.1234)).toBe(0.12);
     expect(trimToTwoDecimalPlaces(0)).toBe(0.0);
+});
+
+test('getMultipleUniqueNumbers should return an array of unique numbers', () => {
+    expect(getMultipleUniqueIndexes(5)).toHaveLength(1);
+    expect(getMultipleUniqueIndexes(5, 2)).toHaveLength(2);
+    expect(getMultipleUniqueIndexes(5, 5)).toHaveLength(5);
+    expect(getMultipleUniqueIndexes(5, 6)).toHaveLength(5);
 });
