@@ -185,3 +185,12 @@ export const getMultipleUniqueIndexes = (length: number, count = 1): number[] =>
     }
     return numbers.slice(0, count);
 };
+
+/**
+ * Returns a random string from the provided list.
+ * @param {string[]} items - Array of items to choose from.
+ * @returns {string} A random item.
+ */
+export function getRandomString(items: string[]): string {
+    return items[Math.floor(Math.random() * items.length)];
+}

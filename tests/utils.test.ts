@@ -15,6 +15,7 @@ import {
     trimToTwoDecimalPlaces,
     capitalizeFirstWord,
     getMultipleUniqueIndexes,
+    getRandomString,
 } from '../src/Common';
 
 test('generateRandomArrayIndex should return a number within range', () => {
@@ -132,4 +133,11 @@ test('getMultipleUniqueNumbers should return an array of unique numbers', () => 
     expect(getMultipleUniqueIndexes(5, 2)).toHaveLength(2);
     expect(getMultipleUniqueIndexes(5, 5)).toHaveLength(5);
     expect(getMultipleUniqueIndexes(5, 6)).toHaveLength(5);
+});
+
+test('getRandomString should return a random item from the provided array', () => {
+    const items = ['apple', 'banana', 'cherry', 'date', 'elderberry'];
+    const randomItem = getRandomString(items);
+
+    expect(items).toContain(randomItem);
 });

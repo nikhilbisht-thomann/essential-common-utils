@@ -233,6 +233,20 @@ Generates multiple unique indexes for an array.
 
 ---
 
+### 17. `getRandomString`
+
+Returns a random string from the provided list.
+
+-   **Parameters**: `items` (string[]): An array of items to choose from.
+-   **Returns**: A random item from the array.
+-   **Example**:
+    ```typescript
+    const randomQuote = getRandomString(['apple', 'banana', 'cherry']);
+    // Output: "banana" (or any other item from the array)
+    ```
+
+---
+
 ## Usage
 
 To use these utilities, import them from the `Common.ts` file in your project. For example:
