@@ -188,9 +188,14 @@ export const getMultipleUniqueIndexes = (length: number, count = 1): number[] =>
 
 /**
  * Returns a random string from the provided list.
+ *
  * @param {string[]} items - Array of items to choose from.
  * @returns {string} A random item.
+ * @throws {Error} If the items array is empty.
  */
-export function getRandomString(items: string[]): string {
+export const getRandomString = (items: string[]): string => {
+    if (items.length === 0) {
+        throw new Error('The items array must not be empty.');
+    }
     return items[Math.floor(Math.random() * items.length)];
-}
+};
