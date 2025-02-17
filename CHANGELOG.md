@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/basal-john/essential-common-utils/compare/v1.6.0...v1.7.0) (2025-02-17)
+
+
+### Features
+
+* enhance getRandomString function to handle empty array case ([02547d2](https://github.com/basal-john/essential-common-utils/commit/02547d2c4cc9e385aa0d820029fdbe79c33d4d91))
+
 ## [1.6.0](https://github.com/basal-john/essential-common-utils/compare/v1.5.0...v1.6.0) (2025-01-03)
 
 
