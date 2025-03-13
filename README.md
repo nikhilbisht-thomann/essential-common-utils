@@ -247,7 +247,7 @@ Returns a random string from the provided list.
 
 ---
 
-### 18. `parseLocalePrice`
+### 18. `parsePricesWithLocaleFormatting`
 
 Parses a price string with locale formatting, handling different formats like European and default parsing.
 
@@ -255,7 +255,7 @@ Parses a price string with locale formatting, handling different formats like Eu
 - **Returns**: A number representing the parsed price.
 - **Example**:
     ```typescript
-    const price = parseLocalePrice('$1,234.56');
+    const price = parsePricesWithLocaleFormatting('$1,234.56');
     // Output: 1234.56
     ```
 
