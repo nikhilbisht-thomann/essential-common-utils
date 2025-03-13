@@ -2,12 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [1.8.0](https://github.com/basal-john/essential-common-utils/compare/v1.7.0...v1.8.0) (2025-03-13)
+### [1.8.1](https://github.com/basal-john/essential-common-utils/compare/v1.8.0...v1.8.1) (2025-03-13)
 
+## [1.8.0](https://github.com/basal-john/essential-common-utils/compare/v1.7.0...v1.8.0) (2025-03-13)
 
 ### Features
 
-* add parsePricesWithLocaleFormatting function to handle various price formats ([88b61c9](https://github.com/basal-john/essential-common-utils/commit/88b61c9db7ad82d21eca1575f96a6abc8181fe09))
+- add parsePricesWithLocaleFormatting function to handle various price formats ([88b61c9](https://github.com/basal-john/essential-common-utils/commit/88b61c9db7ad82d21eca1575f96a6abc8181fe09))
 
 ## [1.7.0](https://github.com/basal-john/essential-common-utils/compare/v1.6.0...v1.7.0) (2025-02-17)
 
