@@ -207,84 +207,64 @@ export const getRandomString = (items: string[]): string => {
  *
  * @param {string} priceText - The price text to parse.
  * @returns {number} The parsed numeric value.
+ *
+ * @description
+ * - Removes currency symbols and non-numeric characters except for commas and periods.
+ * - Returns 0 if no valid numeric data remains.
+ * - Handles cases where no commas or periods exist (plain numbers).
+ * - Identifies US format (comma as thousand separator, period as decimal).
+ * - Identifies European format (period as thousand separator, comma as decimal).
+ * - Makes a best guess if the format is ambiguous.
+ * - Single separator cases are determined based on position and expected number formatting.
+ * - Multiple separator cases are resolved by the position of the last separator.
  */
 export const parsePricesWithLocaleFormatting = (priceText: string): number => {
     if (!priceText) return 0;
 
-    // Remove currency symbols and any non-numeric characters except for commas and periods
     const cleanedText = priceText.replace(/[^0-9.,]/g, '');
 
-    // If there's nothing left after cleaning, return 0
     if (!cleanedText) return 0;
-
-    // Case 1: No commas or periods - just a plain number
     if (!cleanedText.includes(',') && !cleanedText.includes('.')) {
         return Number(cleanedText);
     }
 
-    // Count the occurrences of commas and periods
     const commaCount = (cleanedText.match(/,/g) || []).length;
     const periodCount = (cleanedText.match(/\./g) || []).length;
-
-    // Position of last comma and period
     const lastCommaIndex = cleanedText.lastIndexOf(',');
     const lastPeriodIndex = cleanedText.lastIndexOf('.');
-
-    // Check if it's a US format (1,234.56)
     const isUSFormat =
-        // Last separator is a period and there are digits after it
         (lastPeriodIndex > lastCommaIndex && lastPeriodIndex > cleanedText.length - 4) ||
-        // Only commas exist and they're thousand separators (positioned correctly)
         (commaCount > 0 &&
             periodCount === 0 &&
             cleanedText.length - lastCommaIndex !== 3 &&
             commaCount === Math.floor((cleanedText.length - 1) / 4));
-
-    // Check if it's a European format (1.234,56)
     const isEuropeanFormat =
-        // Last separator is a comma and there are digits after it
         (lastCommaIndex > lastPeriodIndex && lastCommaIndex > cleanedText.length - 4) ||
-        // Only periods exist and they're thousand separators (positioned correctly)
         (periodCount > 0 &&
             commaCount === 0 &&
             cleanedText.length - lastPeriodIndex !== 3 &&
             periodCount === Math.floor((cleanedText.length - 1) / 4));
 
     if (isUSFormat) {
-        // US format: Remove commas, then parse
         return Number(cleanedText.replace(/,/g, ''));
     } else if (isEuropeanFormat) {
-        // European format: Replace periods with nothing, replace comma with period, then parse
         return Number(cleanedText.replace(/\./g, '').replace(',', '.'));
     }
-
-    // If we can't determine the format definitively, make a best guess:
-
-    // If only one separator exists:
     if (commaCount === 1 && periodCount === 0) {
-        // If the comma is followed by exactly 2 digits, treat as decimal
         if (cleanedText.length - lastCommaIndex === 3) {
             return Number(cleanedText.replace(',', '.'));
         }
-        // Otherwise, remove it (treat as thousand separator)
         return Number(cleanedText.replace(',', ''));
     }
-
     if (periodCount === 1 && commaCount === 0) {
-        // If the period is followed by exactly 2 digits, treat as decimal
         if (cleanedText.length - lastPeriodIndex === 3) {
             return Number(cleanedText);
         }
-        // Otherwise, remove it (treat as thousand separator)
         return Number(cleanedText.replace('.', ''));
     }
-
-    // Multiple separators: Use positioning to determine format
     if (lastCommaIndex > lastPeriodIndex) {
-        // Last separator is comma, treat as European
         return Number(cleanedText.replace(/\./g, '').replace(',', '.'));
     } else {
-        // Last separator is period, treat as US
         return Number(cleanedText.replace(/,/g, ''));
     }
 };
