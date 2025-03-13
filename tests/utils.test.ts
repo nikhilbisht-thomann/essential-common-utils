@@ -16,6 +16,7 @@ import {
     capitalizeFirstWord,
     getMultipleUniqueIndexes,
     getRandomString,
+    parsePricesWithLocaleFormatting,
 } from '../src/Common';
 
 test('generateRandomArrayIndex should return a number within range', () => {
@@ -140,4 +141,31 @@ test('getRandomString should return a random item from the provided array', () =
     const randomItem = getRandomString(items);
 
     expect(items).toContain(randomItem);
+});
+
+test('parsePricesWithLocaleFormatting should correctly parse prices with different locale formats', () => {
+    expect(parsePricesWithLocaleFormatting('$1,234.56')).toBe(1234.56); // US format
+    expect(parsePricesWithLocaleFormatting('1.234,56 €')).toBe(1234.56); // European format
+    expect(parsePricesWithLocaleFormatting('1,234')).toBe(1234); // US format without decimal
+    expect(parsePricesWithLocaleFormatting('1.234')).toBe(1234); // European format without decimal
+    expect(parsePricesWithLocaleFormatting('1234')).toBe(1234); // No separator
+    expect(parsePricesWithLocaleFormatting('1,234.56')).toBe(1234.56); // US format
+    expect(parsePricesWithLocaleFormatting('1.234,56')).toBe(1234.56); // European format
+    expect(parsePricesWithLocaleFormatting('1234,56')).toBe(1234.56); // European format without thousand separator
+    expect(parsePricesWithLocaleFormatting('1234.56')).toBe(1234.56); // US format
+    expect(parsePricesWithLocaleFormatting('1.234.567,89')).toBe(1234567.89); // European format with multiple thousand separators
+    expect(parsePricesWithLocaleFormatting('€1.234,56')).toBe(1234.56); // European format with currency symbol
+    expect(parsePricesWithLocaleFormatting('£1,234.56')).toBe(1234.56); // US format with currency symbol
+    expect(parsePricesWithLocaleFormatting('1.234.567')).toBe(1234567); // European format without decimal
+    expect(parsePricesWithLocaleFormatting('1,234,567')).toBe(1234567); // US format with multiple thousand separators
+    expect(parsePricesWithLocaleFormatting('1,234,567.89')).toBe(1234567.89); // US format with multiple thousand separators and decimal
+    expect(parsePricesWithLocaleFormatting('1.234.567,89')).toBe(1234567.89); // European format with multiple thousand separators and decimal
+    expect(parsePricesWithLocaleFormatting('1234567')).toBe(1234567); // No separator
+    expect(parsePricesWithLocaleFormatting('1,234,567')).toBe(1234567); // US format with multiple thousand separators
+    expect(parsePricesWithLocaleFormatting('1.234.567')).toBe(1234567); // European format with multiple thousand separators
+    expect(parsePricesWithLocaleFormatting('1,234,567.89')).toBe(1234567.89); // US format with multiple thousand separators and decimal
+    expect(parsePricesWithLocaleFormatting('1.234.567,89')).toBe(1234567.89); // European format with multiple thousand separators and decimal
+    expect(parsePricesWithLocaleFormatting('1234567')).toBe(1234567); // No separator
+    expect(parsePricesWithLocaleFormatting('1,234,567')).toBe(1234567); // US format with multiple thousand separators
+    expect(parsePricesWithLocaleFormatting('1.234.567')).toBe(1234567); // European format with multiple thousand separators
 });
