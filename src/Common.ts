@@ -268,3 +268,95 @@ export const parsePricesWithLocaleFormatting = (priceText: string): number => {
         return Number(cleanedText.replace(/,/g, ''));
     }
 };
+
+const HTML_ENTITIES: Record<string, string> = {
+    '&amp;': '&',
+    '&lt;': '<',
+    '&gt;': '>',
+    '&quot;': '"',
+    '&apos;': "'",
+    '&nbsp;': ' ',
+    '&copy;': '©',
+    '&reg;': '®',
+    '&trade;': '™',
+    '&euro;': '€',
+    '&pound;': '£',
+    '&cent;': '¢',
+    '&deg;': '°',
+    '&plusmn;': '±',
+    '&para;': '¶',
+    '&sect;': '§',
+    '&times;': '×',
+    '&divide;': '÷',
+    '&mdash;': '—',
+    '&ndash;': '–',
+    '&hellip;': '…',
+    '&laquo;': '«',
+    '&raquo;': '»',
+};
+
+/**
+ * A collection of text helper functions for handling HTML entities and text normalization
+ */
+export const textHelper = {
+    /**
+     * Decodes HTML entities using a simple replacement approach
+     * @param text - The text that might contain HTML entities
+     * @returns The decoded text
+     */
+    decodeHtmlEntities(text: string): string {
+        let decodedText = text;
+
+        // Replace all known HTML entities
+        Object.entries(HTML_ENTITIES).forEach(([entity, char]) => {
+            decodedText = decodedText.replace(new RegExp(entity, 'g'), char);
+        });
+
+        // Handle numeric HTML entities (e.g., &#39;)
+        decodedText = decodedText.replace(/&#(\d+);/g, (match, dec) => {
+            return String.fromCharCode(dec);
+        });
+
+        return decodedText;
+    },
+
+    /**
+     * Normalizes text by decoding HTML entities and standardizing special characters
+     * @param text - The text to normalize
+     * @returns The normalized text
+     */
+    normalizeText(text: string): string {
+        let normalized = this.decodeHtmlEntities(text)
+            .replace(/[\u2018\u2019]/g, "'") // Smart single quotes
+            .replace(/[\u201C\u201D]/g, '"') // Smart double quotes
+            .replace(/[']{2,}/g, '"') // Double single quotes to double quote
+            .trim();
+
+        // Normalize whitespace (multiple spaces to single space)
+        normalized = normalized.replace(/\s+/g, ' ');
+
+        return normalized;
+    },
+
+    /**
+     * Compares two strings after normalization
+     * @param actual - The actual text from the page
+     * @param expected - The expected text from test data
+     * @returns boolean indicating if texts match after normalization
+     */
+    compareTexts(actual: string, expected: string): boolean {
+        const normalizedActual = this.normalizeText(actual);
+        const normalizedExpected = this.normalizeText(expected);
+
+        // Debug logging to help identify issues
+        if (normalizedActual !== normalizedExpected) {
+            console.log('Text comparison failed:');
+            console.log('Original actual  :', actual);
+            console.log('Original expected:', expected);
+            console.log('Normalized actual:', normalizedActual);
+            console.log('Normalized expect:', normalizedExpected);
+        }
+
+        return normalizedActual === normalizedExpected;
+    },
+};

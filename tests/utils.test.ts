@@ -17,6 +17,7 @@ import {
     getMultipleUniqueIndexes,
     getRandomString,
     parsePricesWithLocaleFormatting,
+    textHelper,
 } from '../src/Common';
 
 test('generateRandomArrayIndex should return a number within range', () => {
@@ -168,4 +169,77 @@ test('parsePricesWithLocaleFormatting should correctly parse prices with differe
     expect(parsePricesWithLocaleFormatting('1234567')).toBe(1234567); // No separator
     expect(parsePricesWithLocaleFormatting('1,234,567')).toBe(1234567); // US format with multiple thousand separators
     expect(parsePricesWithLocaleFormatting('1.234.567')).toBe(1234567); // European format with multiple thousand separators
+});
+
+describe('textHelper', () => {
+    test('decodeHtmlEntities should decode HTML entities correctly', () => {
+        const testCases = [
+            {input: '&amp;', expected: '&'},
+            {input: '&lt;div&gt;', expected: '<div>'},
+            {input: 'Copyright &copy; 2024', expected: 'Copyright © 2024'},
+            {input: 'Price in &euro;', expected: 'Price in €'},
+            {input: '&#39;quoted&#39;', expected: "'quoted'"},
+            {input: '&#34;double quoted&#34;', expected: '"double quoted"'},
+            {input: 'Multiple &amp; entities &quot;in&quot; text', expected: 'Multiple & entities "in" text'},
+            {input: 'No entities here', expected: 'No entities here'},
+        ];
+
+        testCases.forEach(({input, expected}) => {
+            expect(textHelper.decodeHtmlEntities(input)).toBe(expected);
+        });
+    });
+
+    test('normalizeText should normalize text correctly', () => {
+        const testCases = [
+            {
+                input: '&quot;Smart quotes" and \u2018apostrophes\u2019',
+                expected: '"Smart quotes" and \'apostrophes\'',
+            },
+            {
+                input: 'Double\u2019\u2019quotes and &amp; symbol',
+                expected: 'Double"quotes and & symbol',
+            },
+            {
+                input: '  Trim spaces  &nbsp;and&nbsp;normalize  ',
+                expected: 'Trim spaces and normalize',
+            },
+            {
+                input: '&#39;Mixed&#39; "quotes" and \u2018entities\u2019',
+                expected: "'Mixed' \"quotes\" and 'entities'",
+            },
+        ];
+
+        testCases.forEach(({input, expected}) => {
+            expect(textHelper.normalizeText(input)).toBe(expected);
+        });
+    });
+
+    test('compareTexts should compare texts after normalization', () => {
+        const testCases = [
+            {
+                actual: '&quot;Hello&quot;',
+                expected: '"Hello"',
+                result: true,
+            },
+            {
+                actual: 'Different "smart" quotes',
+                expected: 'Different "smart" quotes',
+                result: true,
+            },
+            {
+                actual: 'Not &amp; matching',
+                expected: 'Different text',
+                result: false,
+            },
+            {
+                actual: '  Multiple   spaces  ',
+                expected: 'Multiple spaces',
+                result: true,
+            },
+        ];
+
+        testCases.forEach(({actual, expected, result}) => {
+            expect(textHelper.compareTexts(actual, expected)).toBe(result);
+        });
+    });
 });

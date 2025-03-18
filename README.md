@@ -261,6 +261,50 @@ Parses a price string with locale formatting, handling different formats like Eu
 
 ---
 
+### 19. `textHelper`
+
+A collection of text helper functions for handling HTML entities and text normalization.
+
+#### `decodeHtmlEntities`
+
+Decodes HTML entities using a simple replacement approach.
+
+- **Parameters**: `text` (string) - The text that might contain HTML entities
+- **Returns**: The decoded text
+- **Example**:
+    ```typescript
+    const decoded = textHelper.decodeHtmlEntities('&lt;div&gt;Hello&nbsp;World&lt;/div&gt;');
+    // Output: "<div>Hello World</div>"
+    ```
+
+#### `normalizeText`
+
+Normalizes text by decoding HTML entities and standardizing special characters.
+
+- **Parameters**: `text` (string) - The text to normalize
+- **Returns**: The normalized text
+- **Example**:
+    ```typescript
+    const normalized = textHelper.normalizeText('"Smart quotes" and 'apostrophes'');
+    // Output: '"Smart quotes" and \'apostrophes\''
+    ```
+
+#### `compareTexts`
+
+Compares two strings after normalization.
+
+- **Parameters**:
+    - `actual` (string) - The actual text from the page
+    - `expected` (string) - The expected text from test data
+- **Returns**: boolean indicating if texts match after normalization
+- **Example**:
+    ```typescript
+    const matches = textHelper.compareTexts('&quot;Hello&quot;', '"Hello"');
+    // Output: true
+    ```
+
+---
+
 ## Usage
 
 To use these utilities, import them from the `Common.ts` file in your project. For example:
