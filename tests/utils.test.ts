@@ -145,30 +145,42 @@ test('getRandomString should return a random item from the provided array', () =
 });
 
 test('parsePricesWithLocaleFormatting should correctly parse prices with different locale formats', () => {
+    // Basic formats
     expect(parsePricesWithLocaleFormatting('$1,234.56')).toBe(1234.56); // US format
     expect(parsePricesWithLocaleFormatting('1.234,56 €')).toBe(1234.56); // European format
     expect(parsePricesWithLocaleFormatting('1,234')).toBe(1234); // US format without decimal
     expect(parsePricesWithLocaleFormatting('1.234')).toBe(1234); // European format without decimal
     expect(parsePricesWithLocaleFormatting('1234')).toBe(1234); // No separator
+
+    // Decimal cases
     expect(parsePricesWithLocaleFormatting('1,234.56')).toBe(1234.56); // US format
     expect(parsePricesWithLocaleFormatting('1.234,56')).toBe(1234.56); // European format
     expect(parsePricesWithLocaleFormatting('1234,56')).toBe(1234.56); // European format without thousand separator
-    expect(parsePricesWithLocaleFormatting('1234.56')).toBe(1234.56); // US format
-    expect(parsePricesWithLocaleFormatting('1.234.567,89')).toBe(1234567.89); // European format with multiple thousand separators
+    expect(parsePricesWithLocaleFormatting('1234.56')).toBe(1234.56); // US format without thousand separator
+
+    // Large numbers with multiple thousand separators
+    expect(parsePricesWithLocaleFormatting('1.234.567,89')).toBe(1234567.89); // European format
+    expect(parsePricesWithLocaleFormatting('1,234,567.89')).toBe(1234567.89); // US format
+    expect(parsePricesWithLocaleFormatting('1.234.567')).toBe(1234567); // European format without decimal
+    expect(parsePricesWithLocaleFormatting('1,234,567')).toBe(1234567); // US format without decimal
+
+    // Edge cases
+    expect(parsePricesWithLocaleFormatting('9.260')).toBe(9260); // European format without decimal
+    expect(parsePricesWithLocaleFormatting('9,260')).toBe(9260); // US format without decimal
+    expect(parsePricesWithLocaleFormatting('9.260,00')).toBe(9260.0); // European format with decimal
+    expect(parsePricesWithLocaleFormatting('9,260.00')).toBe(9260.0); // US format with decimal
+
+    // Currency symbols and spaces
     expect(parsePricesWithLocaleFormatting('€1.234,56')).toBe(1234.56); // European format with currency symbol
     expect(parsePricesWithLocaleFormatting('£1,234.56')).toBe(1234.56); // US format with currency symbol
-    expect(parsePricesWithLocaleFormatting('1.234.567')).toBe(1234567); // European format without decimal
-    expect(parsePricesWithLocaleFormatting('1,234,567')).toBe(1234567); // US format with multiple thousand separators
-    expect(parsePricesWithLocaleFormatting('1,234,567.89')).toBe(1234567.89); // US format with multiple thousand separators and decimal
-    expect(parsePricesWithLocaleFormatting('1.234.567,89')).toBe(1234567.89); // European format with multiple thousand separators and decimal
-    expect(parsePricesWithLocaleFormatting('1234567')).toBe(1234567); // No separator
-    expect(parsePricesWithLocaleFormatting('1,234,567')).toBe(1234567); // US format with multiple thousand separators
-    expect(parsePricesWithLocaleFormatting('1.234.567')).toBe(1234567); // European format with multiple thousand separators
-    expect(parsePricesWithLocaleFormatting('1,234,567.89')).toBe(1234567.89); // US format with multiple thousand separators and decimal
-    expect(parsePricesWithLocaleFormatting('1.234.567,89')).toBe(1234567.89); // European format with multiple thousand separators and decimal
-    expect(parsePricesWithLocaleFormatting('1234567')).toBe(1234567); // No separator
-    expect(parsePricesWithLocaleFormatting('1,234,567')).toBe(1234567); // US format with multiple thousand separators
-    expect(parsePricesWithLocaleFormatting('1.234.567')).toBe(1234567); // European format with multiple thousand separators
+    expect(parsePricesWithLocaleFormatting(' 1.234,56 ')).toBe(1234.56); // With spaces
+    expect(parsePricesWithLocaleFormatting(' 1,234.56 ')).toBe(1234.56); // With spaces
+
+    // Invalid or empty inputs
+    expect(parsePricesWithLocaleFormatting('')).toBe(0);
+    expect(parsePricesWithLocaleFormatting('abc')).toBe(0);
+    expect(parsePricesWithLocaleFormatting('1.2.3')).toBe(123); // Ambiguous case, assumes US format
+    expect(parsePricesWithLocaleFormatting('1,2,3')).toBe(123); // Ambiguous case, assumes US format
 });
 
 describe('textHelper', () => {

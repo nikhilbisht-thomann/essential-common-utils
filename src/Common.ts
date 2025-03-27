@@ -221,9 +221,12 @@ export const getRandomString = (items: string[]): string => {
 export const parsePricesWithLocaleFormatting = (priceText: string): number => {
     if (!priceText) return 0;
 
+    // Remove currency symbols and any other non-numeric characters except commas and periods
     const cleanedText = priceText.replace(/[^0-9.,]/g, '');
 
     if (!cleanedText) return 0;
+
+    // If no separators, just return the number
     if (!cleanedText.includes(',') && !cleanedText.includes('.')) {
         return Number(cleanedText);
     }
@@ -232,41 +235,81 @@ export const parsePricesWithLocaleFormatting = (priceText: string): number => {
     const periodCount = (cleanedText.match(/\./g) || []).length;
     const lastCommaIndex = cleanedText.lastIndexOf(',');
     const lastPeriodIndex = cleanedText.lastIndexOf('.');
-    const isUSFormat =
-        (lastPeriodIndex > lastCommaIndex && lastPeriodIndex > cleanedText.length - 4) ||
-        (commaCount > 0 &&
-            periodCount === 0 &&
-            cleanedText.length - lastCommaIndex !== 3 &&
-            commaCount === Math.floor((cleanedText.length - 1) / 4));
-    const isEuropeanFormat =
-        (lastCommaIndex > lastPeriodIndex && lastCommaIndex > cleanedText.length - 4) ||
-        (periodCount > 0 &&
-            commaCount === 0 &&
-            cleanedText.length - lastPeriodIndex !== 3 &&
-            periodCount === Math.floor((cleanedText.length - 1) / 4));
+    const totalLength = cleanedText.length;
 
-    if (isUSFormat) {
-        return Number(cleanedText.replace(/,/g, ''));
-    } else if (isEuropeanFormat) {
+    // Helper function to check if a separator is likely a decimal separator
+    const isDecimalSeparator = (index: number, separator: string): boolean => {
+        const remainingLength = totalLength - index;
+        // Check for both European format (comma followed by 2 digits) and US format (period followed by 2 digits)
+        return remainingLength === 3 && (separator === ',' || separator === '.');
+    };
+
+    // Helper function to check if a separator is likely a thousand separator
+    const isThousandSeparator = (index: number, separator: string): boolean => {
+        const remainingLength = totalLength - index;
+        // For US format, comma is thousand separator if followed by more than 2 digits
+        // For European format, period is thousand separator if followed by more than 2 digits
+        // or if it's the last separator and there's no comma
+        return (
+            remainingLength > 3 &&
+            ((separator === ',' && !cleanedText.includes('.')) ||
+                (separator === '.' && (!cleanedText.includes(',') || commaCount === 0)))
+        );
+    };
+
+    // If we have both types of separators
+    if (commaCount > 0 && periodCount > 0) {
+        // If the last separator is a comma and it's followed by 2 digits, it's European format
+        if (lastCommaIndex > lastPeriodIndex && isDecimalSeparator(lastCommaIndex, ',')) {
+            return Number(cleanedText.replace(/\./g, '').replace(',', '.'));
+        }
+        // If the last separator is a period and it's followed by 2 digits, it's US format
+        if (lastPeriodIndex > lastCommaIndex && isDecimalSeparator(lastPeriodIndex, '.')) {
+            return Number(cleanedText.replace(/,/g, ''));
+        }
+        // If we can't determine based on the last separator, try to guess based on the pattern
+        if (isThousandSeparator(lastCommaIndex, ',')) {
+            return Number(cleanedText.replace(/,/g, ''));
+        }
         return Number(cleanedText.replace(/\./g, '').replace(',', '.'));
     }
+
+    // If we only have one type of separator
     if (commaCount === 1 && periodCount === 0) {
-        if (cleanedText.length - lastCommaIndex === 3) {
+        // If the comma is followed by 2 digits, it's likely a decimal separator (European format)
+        if (isDecimalSeparator(lastCommaIndex, ',')) {
             return Number(cleanedText.replace(',', '.'));
         }
+        // Otherwise, it's likely a thousand separator (US format)
         return Number(cleanedText.replace(',', ''));
     }
+
     if (periodCount === 1 && commaCount === 0) {
-        if (cleanedText.length - lastPeriodIndex === 3) {
+        // If the period is followed by 2 digits, it's likely a decimal separator (US format)
+        if (isDecimalSeparator(lastPeriodIndex, '.')) {
             return Number(cleanedText);
         }
+        // Otherwise, it's likely a thousand separator (European format)
         return Number(cleanedText.replace('.', ''));
     }
-    if (lastCommaIndex > lastPeriodIndex) {
-        return Number(cleanedText.replace(/\./g, '').replace(',', '.'));
-    } else {
+
+    // If we have multiple periods and no commas, assume European format
+    if (periodCount > 1 && commaCount === 0) {
+        return Number(cleanedText.replace(/\./g, ''));
+    }
+
+    // If we have multiple commas and no periods, assume US format
+    if (commaCount > 1 && periodCount === 0) {
         return Number(cleanedText.replace(/,/g, ''));
     }
+
+    // If we can't determine the format, try to make a best guess
+    // If the last separator is a comma, assume European format
+    if (lastCommaIndex > lastPeriodIndex) {
+        return Number(cleanedText.replace(/\./g, '').replace(',', '.'));
+    }
+    // Otherwise, assume US format
+    return Number(cleanedText.replace(/,/g, ''));
 };
 
 const HTML_ENTITIES: Record<string, string> = {
