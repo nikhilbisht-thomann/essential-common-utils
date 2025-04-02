@@ -6,8 +6,16 @@ import extractUrls from 'extract-urls';
  * @param {number} arrayLength - The length of the array. Default is 5.
  * @returns {number} A random index for the array.
  */
-export const generateRandomArrayIndex = (arrayLength: number = 5): number =>
-    Math.floor(Math.random() * arrayLength) || 1;
+export const generateRandomArrayIndex = (arrayLength: number = 5): number => Math.floor(Math.random() * arrayLength);
+
+/**
+ * Generates a random number between 1 and the given length.
+ * If length is 0 or negative, it defaults to 1.
+ *
+ * @param {number} maxValue - The maximum value for the random number.
+ * @returns {number} A random number between 1 and maxValue (or 1 if length is invalid).
+ */
+export const generateRandomNumber = (maxValue: number = 5): number => Math.floor(Math.random() * maxValue) || 1;
 
 /**
  * Trims a string and removes all spaces.

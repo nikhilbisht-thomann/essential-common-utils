@@ -4,10 +4,9 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [1.9.0](https://github.com/basal-john/essential-common-utils/compare/v1.8.4...v1.9.0) (2025-03-27)
 
-
 ### Features
 
-* add textHelper utility functions for HTML entity decoding and text normalization ([22c725d](https://github.com/basal-john/essential-common-utils/commit/22c725dfec5cb5994ea86d3689d17958b697a529))
+- add textHelper utility functions for HTML entity decoding and text normalization ([22c725d](https://github.com/basal-john/essential-common-utils/commit/22c725dfec5cb5994ea86d3689d17958b697a529))
 
 ### [1.8.4](https://github.com/basal-john/essential-common-utils/compare/v1.8.3...v1.8.4) (2025-03-18)
 

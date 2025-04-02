@@ -17,12 +17,27 @@ import {
     getMultipleUniqueIndexes,
     getRandomString,
     parsePricesWithLocaleFormatting,
+    generateRandomNumber,
     textHelper,
 } from '../src/Common';
 
 test('generateRandomArrayIndex should return a number within range', () => {
     const arrayLength = 10;
     const index = generateRandomArrayIndex(arrayLength);
+
+    expect(index).toBeLessThan(arrayLength);
+});
+
+test('generateRandomArrayIndex should return  0 if the array has length 1', () => {
+    const arrayLength = 1;
+    const index = generateRandomArrayIndex(arrayLength);
+
+    expect(index).toEqual(0);
+});
+
+test('generateRandomNumber should return a number within range', () => {
+    const arrayLength = 10;
+    const index = generateRandomNumber(arrayLength);
 
     expect(index).toBeGreaterThanOrEqual(0);
     expect(index).toBeLessThan(arrayLength);
