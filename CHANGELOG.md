@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.1](https://github.com/basal-john/essential-common-utils/compare/v1.9.0...v1.9.1) (2025-04-02)
+
 ## [1.9.0](https://github.com/basal-john/essential-common-utils/compare/v1.8.4...v1.9.0) (2025-03-27)
 
 ### Features
