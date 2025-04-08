@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.2](https://github.com/basal-john/essential-common-utils/compare/v1.9.0...v1.9.2) (2025-04-08)
+
+
+### Bug Fixes
+
+* **getCamelCase:** Update method to accept other special characters ([1532749](https://github.com/basal-john/essential-common-utils/commit/153274988b8d898db029677eb9e1c71f0c84aa41))
+
 ### [1.9.1](https://github.com/basal-john/essential-common-utils/compare/v1.9.0...v1.9.1) (2025-04-02)
 
 ## [1.9.0](https://github.com/basal-john/essential-common-utils/compare/v1.8.4...v1.9.0) (2025-03-27)
