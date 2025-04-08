@@ -105,6 +105,7 @@ test('getCamelCaseText should convert text to camelCase', () => {
     expect(getCamelCaseText('123 Number 4 Test!')).toBe('numberTest');
     expect(getCamelCaseText('')).toBe('');
     expect(getCamelCaseText('!@#$%^&*()')).toBe('');
+    expect(getCamelCaseText('Schön, Sie kennenzulernen')).toBe('schönSieKennenzulernen');
 });
 
 test('getPascalCaseText should convert text to PascalCase', () => {

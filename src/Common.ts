@@ -111,7 +111,7 @@ export const convertToEuropeFormat = (value: number): string =>
  */
 export const getCamelCaseText = (text: string): string => {
     return text
-        .replace(/[^a-zA-Z]+/g, ' ')
+        .replace(/[^\p{L}]+/gu, ' ')
         .trim()
         .toLowerCase()
         .split(/\s+/)
