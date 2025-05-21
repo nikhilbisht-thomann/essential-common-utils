@@ -18,7 +18,7 @@ import {
     getRandomString,
     parsePricesWithLocaleFormatting,
     generateRandomNumber,
-    textHelper,
+    textHelper, getHashCode,
 } from '../src/Common';
 
 test('generateRandomArrayIndex should return a number within range', () => {
@@ -275,3 +275,10 @@ describe('textHelper', () => {
         });
     });
 });
+
+test('getHashCode should return different hashes for different inputs', () => {
+    const input1 = 'footer.test.ts';
+    const input2 = 'header.test.ts';
+    expect(getHashCode(input1)).not.toBe(getHashCode(input2));
+});
+
